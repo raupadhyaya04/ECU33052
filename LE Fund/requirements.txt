@@ -1,0 +1,16 @@
+yfinance>=0.2.31
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+cvxpy>=1.4.0
+scikit-learn>=1.3.0
+pyarrow>=14.0.0
+tqdm>=4.66.0
+numba>=0.59.0
+# ── Sentiment engine ──────────────────────────────────────────────────
+python-dotenv>=1.0.0   # load HF_TOKEN from .env
+transformers>=4.40.0   # local FinBERT fallback (ProsusAI/finbert)
+torch>=2.2.0           # required by transformers local inference
+vaderSentiment>=3.3.2  # kept as lightweight backup (not used in pipeline)

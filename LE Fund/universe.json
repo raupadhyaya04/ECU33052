@@ -1,0 +1,56 @@
+{
+  "fund": {
+    "name": "Life on the Edge Fund",
+    "capital_usd": 50000,
+    "max_positions": 8,
+    "base_currency": "USD"
+  },
+  "markets": {
+    "us_large_cap": {
+      "name": "US Large Cap",
+      "region": "North America",
+      "assets": [
+        {"ticker": "AVGO", "name": "Broadcom"},
+        {"ticker": "ARM", "name": "ARM Holdings"}
+      ]
+    },
+    "us_mid_small": {
+      "name": "US Mid/Small Cap",
+      "region": "North America",
+      "assets": [
+        {"ticker": "COIN", "name": "Coinbase"},
+        {"ticker": "PLTR", "name": "Palantir"}
+      ]
+    },
+    "europe": {
+      "name": "Europe",
+      "region": "Europe",
+      "assets": [
+        {"ticker": "ASML", "name": "ASML Holding (NL)"}
+      ]
+    },
+    "asia_pacific": {
+      "name": "Asia Pacific",
+      "region": "Asia",
+      "assets": [
+        {"ticker": "TSM", "name": "TSMC (Taiwan)"},
+        {"ticker": "XPEV", "name": "XPeng (China EV)"}
+      ]
+    },
+    "emerging_markets": {
+      "name": "Emerging Markets",
+      "region": "Global EM",
+      "assets": [
+        {"ticker": "NU", "name": "Nu Holdings (Brazil)"}
+      ]
+    }
+  },
+  "metadata": {
+    "total_assets": 8,
+    "markets_covered": 5,
+    "regions": ["North America", "Europe", "Asia", "Global EM"],
+    "asset_classes": ["Equities"],
+    "constraint": "Long-only, equities-only",
+    "last_updated": "2026-03-22"
+  }
+}
