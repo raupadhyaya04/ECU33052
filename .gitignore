@@ -9,5 +9,7 @@ venv/
 .DS_Store
 .env
 *.pkl
+*.png
+*.csv
 
 TODO
