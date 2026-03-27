@@ -8,16 +8,16 @@ import os
 os.makedirs('output/visualisations', exist_ok=True)
 
 portfolios = {
-    "Portfolio 1 (Aggressive)": {
+    "LE Fund": {
         'NU': 0.2155, 'ASML': 0.2137, 'AVGO': 0.2127, 'TSM': 0.2094,
         'ARM': 0.0263, 'XPEV': 0.0280, 'COIN': 0.0258, 'PLTR': 0.0268, 'BIL': 0.0418 
     },
-    "Portfolio 2 (Compounder)": {
+    "OW Fund": {
         'PG': 0.08, 'KO': 0.07, 'GSK': 0.07, 'UNH': 0.09, 'NEE': 0.05, 
         'MSFT': 0.08, 'GOOG': 0.06, 'META': 0.08, 'AMZN': 0.10, 'V': 0.08, 
         'JPM': 0.06, 'XOM': 0.06, 'TXT': 0.04, 'FFIV': 0.05, 'BIL': 0.03
     },
-    "Portfolio 3 (Defensive)": {
+    "SH Fund": {
         'PG': 0.07, 'FNV': 0.07, 'LMT': 0.09, 'NOC': 0.07, 'BRK-B': 0.07, 
         'RSG': 0.06, 'IBE.MC': 0.07, 'ALV.DE': 0.07, 'MUV2.DE': 0.05, 'CVX': 0.07, 
         'NVS': 0.06, 'KO': 0.06, 'GSK': 0.06, 'NEE': 0.07, 'BIL': 0.06
@@ -48,7 +48,7 @@ for ax, (name, weights) in zip(axes, portfolios.items()):
         
     ax.pie(sizes, labels=labels, autopct=autopct_format, startangle=140, 
            textprops={'fontsize': 10}, colors=sns.color_palette('tab20'))
-    ax.set_title(name, fontsize=16)
+    ax.set_title(name, fontsize=16, weight='bold')
 
 plt.tight_layout()
 plt.savefig('output/visualisations/1_allocations.png', dpi=300)
@@ -108,7 +108,7 @@ for i, row in stats_df.iterrows():
     
     plt.annotate(row['Portfolio'], 
                  (row['Annualized Volatility']*100, row['Annualized Return']*100),
-                 xytext=(15, 0), textcoords='offset points', fontsize=14, va='center')
+                 xytext=(15, 0), textcoords='offset points', fontsize=14, va='center', weight='bold')
 
 plt.title('Risk vs Return Profile (2-Year Historical Annualized)', fontsize=18, weight='bold')
 plt.xlabel('Annualized Volatility (%)', fontsize=14)
@@ -142,15 +142,16 @@ def plot_corr(port_name, p_dict, filename):
     plt.savefig(filename, dpi=300)
     plt.close()
 
-plot_corr("Portfolio 1 (Aggressive)", portfolios["Portfolio 1 (Aggressive)"], 'output/visualisations/4_corr_port1_aggressive.png')
-plot_corr("Portfolio 3 (Defensive)", portfolios["Portfolio 3 (Defensive)"], 'output/visualisations/5_corr_port3_defensive.png')
+plot_corr("LE Fund", portfolios["LE Fund"], 'output/visualisations/4_corr_le_fund.png')
+plot_corr("OW Fund", portfolios["OW Fund"], 'output/visualisations/5_corr_ow_fund.png')
+plot_corr("SH Fund", portfolios["SH Fund"], 'output/visualisations/6_corr_sh_fund.png')
 
 # 5. MONTE CARLO CONES (10 YEARS)
 print("5. Generating Monte Carlo Value Projections (10 Years)...")
 mc_params = {
-    "Portfolio 1 (Aggressive)": {"mu": 0.1416, "vol": 0.1087 * np.sqrt(12)},
-    "Portfolio 2 (Compounder)": {"mu": 0.0990, "vol": 0.0819 * np.sqrt(12)},
-    "Portfolio 3 (Defensive)":  {"mu": 0.0744, "vol": 0.0610 * np.sqrt(12)}
+    "LE Fund": {"mu": 0.1416, "vol": 0.1087 * np.sqrt(12)},
+    "OW Fund": {"mu": 0.0990, "vol": 0.0819 * np.sqrt(12)},
+    "SH Fund":  {"mu": 0.0744, "vol": 0.0610 * np.sqrt(12)}
 }
 
 N_PATHS = 1000
@@ -185,11 +186,10 @@ for ax, ((name, params), color) in zip(zip(axes, mc_params.items()), colors):
     for i in range(15):
         ax.plot(time_arr, wealth[:, i], color=color, alpha=0.05, linewidth=1)
         
-    ax.set_title(f"{name}\nAssumed E(R): {mu*100:.1f}% | Vol: {vol*100:.1f}%", fontsize=15)
+    ax.set_title(f"{name}\nAssumed E(R): {mu*100:.1f}% | Vol: {vol*100:.1f}%", fontsize=15, weight='bold')
     ax.set_xlabel('Years', fontsize=12)
     ax.set_yscale('log')
     
-    # Format y-axis nicely
     import matplotlib.ticker as ticker
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: f'${y:,.0f}'))
     
@@ -199,7 +199,7 @@ for ax, ((name, params), color) in zip(zip(axes, mc_params.items()), colors):
     ax.legend(loc='upper left', fontsize=11)
 
 plt.tight_layout()
-plt.savefig('output/visualisations/6_monte_carlo_projections.png', dpi=300)
+plt.savefig('output/visualisations/7_monte_carlo_projections.png', dpi=300)
 plt.close()
 
-print("✅ Success! All visualisations generated in 'output/visualisations/'")
+print("✅ Success! All visualisations generated dynamically.")
