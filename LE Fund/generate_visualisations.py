@@ -37,7 +37,7 @@ returns = data.pct_change().dropna()
 # 1. PIE CHARTS
 print("1. Generating Allocation Pie Charts...")
 fig, axes = plt.subplots(1, 3, figsize=(20, 6))
-fig.suptitle('Fund vs Friends: Portfolio Asset Allocations', fontsize=22, weight='bold')
+fig.suptitle('Portfolio Asset Allocations', fontsize=22, weight='bold')
 
 for ax, (name, weights) in zip(axes, portfolios.items()):
     labels = list(weights.keys())
