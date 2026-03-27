@@ -30,7 +30,7 @@ for p in portfolios.values():
 all_tickers = list(all_tickers)
 
 print("Fetching data from Yahoo Finance...")
-data = yf.download(all_tickers, period="2y", interval="1d")['Adj Close']
+data = yf.download(all_tickers, period="2y", interval="1d")['Close']
 data = data.ffill().dropna()
 returns = data.pct_change().dropna()
 
@@ -163,7 +163,7 @@ fig, axes = plt.subplots(1, 3, figsize=(22, 7), sharey=True)
 fig.suptitle('10-Year Monte Carlo Wealth Projections (Initial Capital: $50,000)', fontsize=22, weight='bold')
 
 np.random.seed(42)
-for ax, ((name, params), color) in zip(zip(axes, mc_params.items()), colors):
+for ax, (name, params), color in zip(axes, mc_params.items(), colors):
     mu = params["mu"]
     vol = params["vol"]
     
